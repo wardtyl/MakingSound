@@ -7,17 +7,31 @@ Train train;
 
 //declare a SoundFile
 SoundFile whistle;
+SoundFile ding;
+
+//declare timer variables
+float timerLength = 50; //target value for timer
+float timerValue = 0; //counting up towards tbe length
 
 void setup() {
   size(400, 400);
   //load the sound effect from the data folder
 whistle = new SoundFile(this, "train-whistle.wav");
+ding = new SoundFile(this, "pling.wav");
 
   train = new Train(random(100, 300), random(0.5, 2));
+    background(255);
+
 }
 
 void draw() {
-  background(255);
+  timerValue += 1;
+  if(timerValue > timerLength){
+    timerValue = 0;
+    //do something!
+    background(random(255), random(255), random(255));
+    ding.play();
+  }
 
   train.update();
 }
